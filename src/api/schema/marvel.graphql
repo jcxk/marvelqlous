@@ -1,0 +1,11 @@
+scalar Date
+scalar DateTime
+scalar JSON
+scalar JSONObject
+
+
+type Query {
+    debug(arg1:String): JSON
+}
+
+
