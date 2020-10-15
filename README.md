@@ -1,5 +1,8 @@
 #Marvelqlous
 
+Based on marvel api https://developer.marvel.com/documentation/getting_started, 
+converting the swagger1 api, to grahpql with the tools script.
+
 Demo app (WIP) showcase for:
  
 - How graphql/apollo client can speed up development:

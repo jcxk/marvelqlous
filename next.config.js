@@ -1,13 +1,14 @@
 module.exports = {
-    /*
-    async rewrites() {
+
+    async redirects() {
         return [
             {
-                source: '/about',
-                destination: '/',
+                source: '/',
+                destination: '/list/comics',
+                permanent: true
             },
         ]
     },
-    */
+
 
 }
