@@ -33,8 +33,6 @@
   },
   "devDependencies": {
     "tailwindcss": "^1.8.12",
-    "autoprefixer": "9.8.0",
-    "cssnano": "4.1.10",
     "@graphql-codegen/cli": "1.17.10",
     "@graphql-codegen/introspection": "1.18.0",
     "@graphql-codegen/typescript": "^1.17.10",
