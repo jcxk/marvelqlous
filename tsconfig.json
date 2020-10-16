@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "paths": {
+      "@/generated/*": ["src/generated/*"],
       "@/components/*": ["src/components/*"],
       "@/lib/*": ["src/lib/*"],
       "@/api/*": ["src/api/*"],

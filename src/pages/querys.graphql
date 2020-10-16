@@ -1,0 +1,1 @@
+query characters(name: String, nameStartsWith: String, modifiedSince: String, comics: [Int!], series: [Int!], events: [Int!], stories: [Int!], orderBy: [String!], limit: Int, offset: Int): CharacterDataWrapper!

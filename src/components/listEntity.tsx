@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import _ from "lodash";
-import {withApollo} from '../lib/apollo';
-import {fetchList} from '../lib/utils';
+import {withApollo} from '@/lib/apollo';
+import {fetchList} from '@/lib/utils';
 
 
 type ListProps = {

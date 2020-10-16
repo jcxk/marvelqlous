@@ -1,8 +1,8 @@
 import React, {Fragment, useState} from 'react';
 import {gql, useQuery} from '@apollo/client';
 import _ from "lodash";
-import {withApollo} from './apollo';
-import {QueryCharactersArgs, CharacterDataWrapper   }from "../types.d";
+//import {withApollo} from '@/lib/apollo';
+//import {QueryCharactersArgs, CharacterDataWrapper   }from "@/generated/types.d";
 
 const fields = {
     characters: `
@@ -53,7 +53,7 @@ export const fetchList = (entityName) => {
         loading,
         fetchMore,
         error,
-    } = useQuery<CharacterDataWrapper,QueryCharactersArgs>(
+    } = useQuery(
         GET_LIST(entityName),
         {
             variables: {

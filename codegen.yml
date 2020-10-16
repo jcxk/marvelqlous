@@ -1,6 +1,32 @@
 overwrite: true
 schema: http://localhost:3000/api/graphql
+documents: ./src/api/schema/marvel.graphql
 generates:
-  ./src/types.d.ts:
+  ./src/generated/types.ts:
     plugins:
       - typescript
+      - typescript-operations
+      - named-operations-object
+  ./src/generated/qreq.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-graphql-request
+    config:
+      rawRequest: true
+
+  ./src/generated/graphql.schema.json:
+    plugins:
+      - introspection
+
+  ./src/generated/graphql.tsx:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      skipTypename: false
+      withHooks: true
+      withHOC: false
+      withComponent: false
+
