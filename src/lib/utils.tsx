@@ -58,9 +58,7 @@ export const fetchList = (entityName) => {
         {
             variables: {
                 offset: 10,
-                limit: 20,
-                nameStartsWith:"Capt"
-
+                limit: 20
             },
             fetchPolicy: "cache-and-network"
         }

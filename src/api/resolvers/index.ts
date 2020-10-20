@@ -12,7 +12,7 @@ export const resolversObj = {
     JSONObject: GraphQLJSONObject,
     Date: GraphQLDate,
     DateTime: GraphQLDateTime,
-    //...Entities,
+    ...Entities,
     Query,
    // Mutation,
     //Subscription

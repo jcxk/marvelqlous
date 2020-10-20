@@ -1,0 +1,15 @@
+# characterfields.fragment.graphql
+fragment characterFields on CharacterDataWrapper_data {
+
+    results {
+       id
+       name
+       description
+       thumbnail {
+           path
+           extension
+       }
+       modified
+    }
+}
+

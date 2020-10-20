@@ -4,8 +4,30 @@ scalar JSON
 scalar JSONObject
 
 
+enum marvelEntity {
+    comic
+    character
+    creator
+    event
+    series
+    story
+}
+
+union marvelEntityResult = Comic | Character | Creator | Event | Series | Story
+type pagination {
+    count: Int
+    limit: Int
+    offset: Int
+    total: Int
+}
+type listWrapper {
+    entity: marvelEntity
+    pagination: pagination
+    results: [marvelEntityResult]
+}
 type Query {
     debug(arg1:String): JSON
+    list(marvelEntity: marvelEntity!, filters: JSONObject): listWrapper
 }
 
 

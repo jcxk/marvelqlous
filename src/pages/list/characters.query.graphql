@@ -1,0 +1,9 @@
+query getCharacters($name: String){
+    characters(name: $name) {
+        data {
+            ...characterFields
+        }
+
+
+    }
+}

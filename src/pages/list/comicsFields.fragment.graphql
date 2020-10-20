@@ -1,0 +1,11 @@
+# comicsFields.fragment.graphql
+
+fragment comicsFields on ComicDataWrapper_data {
+
+    results {
+       id
+       title
+
+    }
+}
+

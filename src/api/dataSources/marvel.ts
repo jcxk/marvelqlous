@@ -23,6 +23,12 @@ class MarvelAPI extends RESTDataSource {
         request.params.set('hash', crypto.createHash('md5').update(String(ts) + this.privateKey + this.publicKey).digest('hex'));
     }
 
+    async getEntityByArgs(params) {
+
+        return this.get(params.marvelEntity +"s", params.filters);
+    }
+
+
     async getEntity(entityName, params) {
         return this.get(entityName,  params);
     }

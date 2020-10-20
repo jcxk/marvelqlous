@@ -1,0 +1,9 @@
+# comicsFields.fragment.graphql
+
+fragment Pagination on Pagination {
+    count
+    limit
+    offset
+    total
+}
+

@@ -1,32 +1,32 @@
 overwrite: true
-schema: http://localhost:3000/api/graphql
-documents: ./src/api/schema/marvel.graphql
+schema:
+  - "src/api/schema/*.graphql"
+documents: "./src/pages/**/*.graphql"
 generates:
-  ./src/generated/types.ts:
+  src/generated/types.ts:
     plugins:
       - typescript
       - typescript-operations
       - named-operations-object
-  ./src/generated/qreq.ts:
-    plugins:
-      - typescript
-      - typescript-operations
-      - typescript-graphql-request
-    config:
-      rawRequest: true
-
-  ./src/generated/graphql.schema.json:
+  src/generated/schema.json:
     plugins:
       - introspection
-
-  ./src/generated/graphql.tsx:
+  src/generated/fragments.json:
     plugins:
-      - typescript
-      - typescript-operations
-      - typescript-react-apollo
+        - "fragment-matcher"
+  src/generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
     config:
-      skipTypename: false
-      withHooks: true
-      withHOC: false
-      withComponent: false
+      reactApolloVersion: 3
+      withRefetchFn: true
+      #pureMagicComment: true
 
+  src/generated/page.tsx:
+    config:
+      reactApolloVersion: 3
+      withHooks: true
+    plugins:
+      - "graphql-codegen-apollo-next-ssr" # replace by - graphql-codegen-apollo-next-ssr
