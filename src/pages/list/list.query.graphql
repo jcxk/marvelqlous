@@ -1,0 +1,15 @@
+
+query listDynamic($entity: , marvelEntity!, $filters: JSONObject!){
+    list(marvelEntity:$entity, filters: $filters) {
+        pagination {
+            ...Pagination
+         }
+        results {
+            __typename
+            ... on Comic {
+                id
+                title
+            }
+        }
+    }
+}

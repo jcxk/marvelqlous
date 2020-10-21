@@ -14,7 +14,7 @@ enum marvelEntity {
 }
 
 union marvelEntityResult = Comic | Character | Creator | Event | Series | Story
-type pagination {
+type Pagination {
     count: Int
     limit: Int
     offset: Int
@@ -22,7 +22,7 @@ type pagination {
 }
 type listWrapper {
     entity: marvelEntity
-    pagination: pagination
+    pagination: Pagination
     results: [marvelEntityResult]
 }
 type Query {
