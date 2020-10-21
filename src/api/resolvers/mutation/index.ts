@@ -1,10 +1,3 @@
-
-
 module.exports = {
-
-    Mutation: {
-
-    }
-
+  Mutation: {},
 };
-

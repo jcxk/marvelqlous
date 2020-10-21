@@ -1,0 +1,30 @@
+{
+  "__schema": {
+    "types": [
+      {
+        "kind": "UNION",
+        "name": "marvelEntityResult",
+        "possibleTypes": [
+          {
+            "name": "Comic"
+          },
+          {
+            "name": "Character"
+          },
+          {
+            "name": "Creator"
+          },
+          {
+            "name": "Event"
+          },
+          {
+            "name": "Series"
+          },
+          {
+            "name": "Story"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,31 +1,30 @@
-import React, {Fragment, useState} from 'react';
-import {gql, useQuery} from '@apollo/client';
-import _ from "lodash";
+import React, { Fragment, useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
+import _ from 'lodash';
 //import {withApollo} from '@/lib/apollo';
 //import {QueryCharactersArgs, CharacterDataWrapper   }from "@/generated/types.d";
 
 const fields = {
-    characters: `
+  characters: `
         fragment charactersFields on Character {
             id
             name
         }
         `,
 
-    comics: `
+  comics: `
         fragment comicsFields on Comic {
             id
             name: title 
         }
         `,
-    events: `
+  events: `
         fragment eventsFields on Event {
             id
             name: title 
         }
-        `
-}
-
+        `,
+};
 
 export const GET_LIST = (entityName) => gql`
 
@@ -38,7 +37,7 @@ export const GET_LIST = (entityName) => gql`
             offset
             total
             results {
-                ${"..."+entityName +"Fields"}
+                ${'...' + entityName + 'Fields'}
             }
         }
     }
@@ -47,40 +46,30 @@ export const GET_LIST = (entityName) => gql`
 
 `;
 
-export const fetchList = (entityName) => {
-    const {
-        data,
-        loading,
-        fetchMore,
-        error,
-    } = useQuery(
-        GET_LIST(entityName),
-        {
-            variables: {
-                offset: 10,
-                limit: 20
-            },
-            fetchPolicy: "cache-and-network"
-        }
-    );
-    const loadMore = (offset: number, limit: number): Promise<any> => {
-        return fetchMore({
-            variables: {
-                limit: limit,
-                offset: offset + limit
-            },
-            updateQuery: (prev, {fetchMoreResult}) => {
-                if (!fetchMoreResult) return prev;
-                return fetchMoreResult;
-            }
-        })
-    }
-    return {
-        data: _.get(data, entityName + ".data", []),
-        loading,
-        loadMore,
-        error
-    }
-}
-
-
+export const FetchList = (entityName: string) => {
+  const { data, loading, fetchMore, error } = useQuery(GET_LIST(entityName), {
+    variables: {
+      offset: 10,
+      limit: 20,
+    },
+    fetchPolicy: 'cache-and-network',
+  });
+  const loadMore = (offset: number, limit: number): Promise<any> => {
+    return fetchMore({
+      variables: {
+        limit: limit,
+        offset: offset + limit,
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev;
+        return fetchMoreResult;
+      },
+    });
+  };
+  return {
+    data: _.get(data, entityName + '.data', []),
+    loading,
+    loadMore,
+    error,
+  };
+};
