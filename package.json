@@ -1,7 +1,12 @@
 {
   "name": "marveloqlous",
-  "version": "0.1.0",
-  "private": true,
+  "version": "0.1.1",
+  "author": "jcxk",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jcxk/marvelqlous.git"
+  },
+  "license": "ISC",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
