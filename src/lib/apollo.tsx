@@ -4,7 +4,7 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import fetch from 'isomorphic-unfetch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-export function withApollo(PageComponent) {
+export function withApollo(PageComponent: any): void {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApolloClient(apolloState);
 
@@ -15,7 +15,7 @@ export function withApollo(PageComponent) {
     );
   };
 
-  WithApollo.getInitialProps = async ctx => {
+  WithApollo.getInitialProps = async (ctx: any) => {
     const { AppTree } = ctx;
     const apolloClient = (ctx.apollClient = initApolloClient());
 
@@ -36,7 +36,7 @@ export function withApollo(PageComponent) {
           <AppTree
             pageProps={{
               ...pageProps,
-              apolloClient
+              apolloClient,
             }}
           />
         );
@@ -50,7 +50,7 @@ export function withApollo(PageComponent) {
     const apolloState = apolloClient.cache.extract();
     return {
       ...pageProps,
-      apolloState
+      apolloState,
     };
   };
 
@@ -63,13 +63,9 @@ const url = isDev
   : 'https://tracker.scotttolinski.now.sh';
 
 const initApolloClient = (initialState = {}) => {
-  // const ssrMode = typeof window === 'undefined';
-  const cache = new InMemoryCache().restore(initialState);
-
-  const client = new ApolloClient({
+  return new ApolloClient({
     uri: `${url}/api/graphql`,
     fetch,
-    cache
+    cache: new InMemoryCache().restore(initialState),
   });
-  return client;
 };

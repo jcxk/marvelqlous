@@ -5,7 +5,7 @@ module.exports = {
     includes: ['./src/**/*.tsx'],
     service: {
       name: 'backend',
-      url: "http://localhost:3000/api/graphql"
+      url: 'http://localhost:3000/api/graphql',
     },
-  }
+  },
 };

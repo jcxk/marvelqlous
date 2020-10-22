@@ -1,29 +1,37 @@
 /* Custom css */
 
 .btn {
-    @apply bg-blue-500 px-4 py-2 text-white;
+  @apply bg-blue-500 px-4 py-2 text-white;
 }
 
 .alert {
-    @apply border p-4 rounded;
+  @apply border p-4 rounded;
 }
 
 .inputed {
-    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight ;
+  @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight;
 }
 
 .loader {
-    border-top-color: #3498db;
-    -webkit-animation: spinner 1.5s linear infinite;
-    animation: spinner 1.5s linear infinite;
+  border-top-color: #3498db;
+  -webkit-animation: spinner 1.5s linear infinite;
+  animation: spinner 1.5s linear infinite;
 }
 
 @-webkit-keyframes spinner {
-    0% { -webkit-transform: rotate(0deg); }
-    100% { -webkit-transform: rotate(360deg); }
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
 }
 
 @keyframes spinner {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
