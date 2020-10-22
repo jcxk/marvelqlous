@@ -16,12 +16,10 @@
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "gql-codegen": "graphql-codegen --config codegen.yml"
   },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": "npm run lint:fix"
-  },
+
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint"
+      "pre-commit": "npm run lint:fix"
     }
   },
   "dependencies": {
