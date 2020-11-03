@@ -2,12 +2,15 @@ import _ from 'lodash';
 
 const resolvers: any = {
   list: async (parent, args, { dataSources }, info) => {
-    const response = await dataSources.marvelApi.getEntityByArgs(args);
-
+    //const response = await dataSources.marvelApi.getEntityByArgs(args);
+    const client = await dataSources.marvelApi.getClient();
+    const response = await client.apis.default[args.marvelEntity + 's'](
+      args.filters
+    );
     return {
-      results: _.get(response, 'data.results', []),
+      results: _.get(response, 'obj.data.results', []),
       pagination: {
-        ..._.pick(_.get(response, 'data', {}), [
+        ..._.pick(_.get(response, 'obj.data', {}), [
           'count',
           'limit',
           'offset',

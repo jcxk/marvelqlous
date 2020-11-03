@@ -33,7 +33,6 @@
     "@graphback/codegen-client": "^1.0.1",
     "@graphql-codegen/typescript-graphql-request": "^2.0.1",
     "@graphql-mesh/cli": "0.11.6",
-    "@graphql-mesh/openapi": "0.10.1",
     "@graphql-mesh/graphql": "^0.7.5",
     "@graphql-tools/graphql-file-loader": "^6.2.3",
     "@graphql-tools/load": "^6.2.3",
@@ -55,7 +54,8 @@
     "postcss-preset-env": "^6.7.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-tailwind-table": "^1.0.1"
+    "react-tailwind-table": "^1.0.1",
+    "swagger-client": "^3.12.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^1.17.10",
