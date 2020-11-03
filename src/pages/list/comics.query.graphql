@@ -1,9 +1,0 @@
-query getComics($name: String){
-    comics(title: $name) {
-        data {
-            ...comicsFields
-        }
-
-
-    }
-}

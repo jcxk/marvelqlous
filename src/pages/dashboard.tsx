@@ -1,11 +1,19 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Sidebar from '@/components/Sidebar';
+import { withApollo } from '@/lib/apollo';
 
-const HomePage: React.FC = () => {
+//import _ from 'lodash';
+type PageProps = {
+  client: any;
+};
+
+const HomePage: React.FC<PageProps> = (props) => {
+  console.log(props.client);
   return (
     <>
       <Sidebar />
+
       <div className="relative md:ml-64 bg-gray-200">
         <Navbar />
         {/* Header */}
@@ -466,4 +474,4 @@ const HomePage: React.FC = () => {
   );
 };
 
-export default HomePage;
+export default withApollo(HomePage);

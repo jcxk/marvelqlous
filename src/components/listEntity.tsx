@@ -2,9 +2,16 @@ import React, { FC } from 'react';
 import _ from 'lodash';
 import { withApollo } from '@/lib/apollo';
 //import { fetchList } from '@/lib/utils';
-import * as GqlOps from '@/generated/graphql';
+//import * as GqlOps from '@/generated/graphql';
+
 import Table from 'react-tailwind-table';
 import 'react-tailwind-table/dist/index.css';
+
+import * as GenSdk from '@/generated/sdk';
+import * as Apollo from '@apollo/client';
+//import { CharactersQueryQueryVariables } from '@/generated/sdk';
+
+const sdk: any = GenSdk.getSdk(Apollo.useQuery);
 
 type ListProps = {
   entityName: string;
@@ -17,7 +24,7 @@ const ListEntity: FC<ListProps> = ({ entityName }) => {
     loading,
     //loadMore,
     error,
-  } = GqlOps['useGet' + _.startCase(entityName) + 'Query'](); //fetchList(entityName);
+  } = sdk[entityName + 'Query']();
 
   if (loading)
     return (

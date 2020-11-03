@@ -1,19 +1,6 @@
 sources:
   - name: Marvelqlous
     handler:
-      openapi:
-        source: "./src/api/external/marvel_fixed.json"
-        #customFetch: "./src/api/lib/customFetch.js"
-
-
-#additionalTypeDefs: |
-#      extend type Query {
-#        viewsInPastMonth(project: String!): Float!
-#      }
-#require:
-#  - ts-node/register/transpile-only
-#additionalResolvers:
-#  - ./src/api/resolvers/query/marvel.query.ts
-
-#serve:
-#  exampleQuery: example-queries/*.graphql
+      graphql:
+        endpoint: http://localhost:3000/api/graphql
+#just frontend generate sdk

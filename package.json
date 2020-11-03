@@ -19,7 +19,7 @@
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "gql-codegen": "graphql-codegen --config codegen.yml",
     "mesh:serve": "mesh serve",
-    "mesh:sdk": "mesh generate-sdk --output ./src/generated/sdk.generated.ts --depth 3"
+    "mesh:sdk": "mesh generate-sdk --output ./src/generated/sdk.ts --depth 5"
   },
   "husky": {
     "hooks": {
@@ -34,6 +34,7 @@
     "@graphql-codegen/typescript-graphql-request": "^2.0.1",
     "@graphql-mesh/cli": "0.11.6",
     "@graphql-mesh/openapi": "0.10.1",
+    "@graphql-mesh/graphql": "^0.7.5",
     "@graphql-tools/graphql-file-loader": "^6.2.3",
     "@graphql-tools/load": "^6.2.3",
     "@graphql-tools/schema": "^6.2.3",
@@ -86,6 +87,7 @@
     "ts-jest": "^26.4.1",
     "ts-node": "^9.0.0",
     "tsconfig-paths-webpack-plugin": "^3.3.0",
-    "typescript": "^4.0.3"
+    "typescript": "^4.0.3",
+    "typescript-json-schema": "^0.43.0"
   }
 }
