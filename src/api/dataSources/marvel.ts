@@ -20,7 +20,7 @@ export default class MarvelAPI extends RESTDataSource {
     const requestInterceptor = (request: any) => {
       //dataSources.marvelApi.authParams;
       const ts = new Date().getTime().toString();
-      var url = new URL(request.url);
+      const url = new URL(request.url);
       url.searchParams.append('apikey', this.publicKey);
       url.searchParams.append('ts', ts);
       url.searchParams.append(

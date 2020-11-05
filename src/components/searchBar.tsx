@@ -36,7 +36,7 @@ const widgets = {
 };
 const SearchBar: FC<ListProps> = ({ filtersData, vars, onSubmitFilters }) => {
   const [showModal, setShowModal] = React.useState(false);
-  let filteredVars: any = {};
+  const filteredVars: any = {};
   _.map(vars.properties, (item, key) => {
     // console.log(item, key);
     if (item.type !== 'array') {
