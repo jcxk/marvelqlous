@@ -61,7 +61,7 @@ const SearchBar: FC<ListProps> = ({ filtersData, vars, onSubmitFilters }) => {
       {showModal ? (
         <>
           <div
-            className="m-3 justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+            className="m-3 justify-center items-center flex overflow-x-hidden overflow-y-auto inset-0 z-50 outline-none focus:outline-none"
             //onClick={() => setShowModal(false)}
           >
             <div className="relative w-auto my-6 mx-auto max-w-6xl">
@@ -80,7 +80,7 @@ const SearchBar: FC<ListProps> = ({ filtersData, vars, onSubmitFilters }) => {
                   </button>
                 </div>
                 {/*body*/}
-                <div className="relative p-6 flex-auto">
+                <div className="overflow-x-auto p-6 flex-auto">
                   <Form
                     schema={newVars}
                     //uiSchema={uiSchema}
