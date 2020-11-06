@@ -1,53 +1,41 @@
 import React, { FC } from 'react';
 import _ from 'lodash';
-import sdkSchemas from '@/generated/sdk.json';
-import { withApollo } from '@/lib/apollo';
-const log = (type) => console.log.bind(console, type);
+
 type ListProps = {
-  vars: any;
+  jsonSchema: any;
   onSubmitFilters: void;
   filtersData: any;
   // client: any;
 };
 import 'antd/dist/antd.css';
-
 import { withTheme } from '@rjsf/core';
 import { Theme as AntDTheme } from '@rjsf/antd';
 const Form = withTheme(AntDTheme);
-const uiSchema = {
-  'ui:widget': 'checkbox',
-};
-//const customFields = { StringField: CustomString };
-//const customWidgets = { CheckboxWidget: CustomCheckbox };
-const CustomCheckbox = function (props: any) {
-  return (
-    <button
-      id="custom"
-      className={props.value ? 'checked' : 'unchecked'}
-      onClick={() => props.onChange(!props.value)}
-    >
-      {String(props.value)}
-    </button>
-  );
-};
 
-const widgets = {
-  CheckboxWidget: CustomCheckbox,
-};
-const SearchBar: FC<ListProps> = ({ filtersData, vars, onSubmitFilters }) => {
-  const [showModal, setShowModal] = React.useState(false);
-  const filteredVars: any = {};
-  _.map(vars.properties, (item, key) => {
-    // console.log(item, key);
-    if (item.type !== 'array') {
-      filteredVars[key] = item;
-    }
-    return true;
-  });
-  const newVars = {
-    properties: filteredVars,
+const schemaHanlder = (jsonSchema: any) => {
+  return {
+    properties: _.reduce(
+      jsonSchema.properties,
+      (result: any, value: any, key: string) => {
+        if (value.type !== 'array') {
+          result[key] = value;
+        } else {
+          //@TODO react-typhead component with grahpql
+          delete result[key];
+        }
+        return result;
+      }
+    ),
     type: 'object',
   };
+};
+
+const SearchBar: FC<ListProps> = ({
+  filtersData,
+  jsonSchema,
+  onSubmitFilters,
+}) => {
+  const [showModal, setShowModal] = React.useState(false);
 
   return (
     <>
@@ -82,13 +70,8 @@ const SearchBar: FC<ListProps> = ({ filtersData, vars, onSubmitFilters }) => {
                 {/*body*/}
                 <div className="overflow-x-auto p-6 flex-auto">
                   <Form
-                    schema={newVars}
-                    //uiSchema={uiSchema}
-                    //widgets={widgets}
-                    onChange={log('changed')}
-                    //onChange={(form) => onChangeFilters(form.formData)}
+                    schema={schemaHanlder(jsonSchema)}
                     onSubmit={onSubmitFilters}
-                    onError={log('errors')}
                     formData={filtersData}
                   >
                     <div className="flex items-center justify-end p-6 border-t border-solid border-gray-300 rounded-b">

@@ -1,7 +1,8 @@
-import marvelAPI from './marvel';
+//import marvelAPI from './marvel';
+import marvelSwaggerAPI from './marvelSwagger';
 const dataSources = (): any => {
   return {
-    marvelApi: new marvelAPI(),
+    marvelApi: new marvelSwaggerAPI(),
   };
 };
 

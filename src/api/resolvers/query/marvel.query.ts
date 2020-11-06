@@ -2,7 +2,6 @@ import _ from 'lodash';
 
 const resolvers: any = {
   list: async (parent, args, { dataSources }, info) => {
-    //const response = await dataSources.marvelApi.getEntityByArgs(args);
     const client = await dataSources.marvelApi.getClient();
     const response = await client.apis.default[args.marvelEntity + 's'](
       args.filters
@@ -28,16 +27,15 @@ const resolvers: any = {
       info,
     };
   },
-  single_character_by_id: async (parent, args, { dataSources }, info) => {
-    return dataSources.marvelApi.getCharacterById(args.characterId);
-  },
 };
 
 const entityNames = ['characters', 'comics', 'creators', 'events'];
 
 _.map(entityNames, (entityName) => {
   resolvers[entityName] = async (parent, args, { dataSources }, info) => {
-    return dataSources.marvelApi.getEntity(entityName, args);
+    const client = await dataSources.marvelApi.getClient();
+    const response = await client.apis.default[entityName](args);
+    return response.obj;
   };
 });
 

@@ -12,6 +12,13 @@ import SearchBar from '@/components/searchBar';
 //import { CharactersQueryQueryVariables } from '@/generated/sdk';
 
 const sdk: any = GenSdk.getSdk(Apollo.useQuery);
+const sdkJsonSchema = (entityName: string) => {
+  return _.get(
+    sdkSchemas,
+    'definitions.' + _.startCase(entityName) + 'QueryQueryVariables',
+    {}
+  );
+};
 
 type ListProps = {
   entityName: string;
@@ -24,15 +31,14 @@ const ListEntity: FC<ListProps> = ({ entityName }) => {
       //nameStartsWith: 'spider',
     },
   });
-  console.log(filters);
+
   const {
     data,
     loading,
-    variables,
     //loadMore,
     error,
   } = sdk[entityName + 'Query'](filters);
-  console.log(variables);
+
   if (loading)
     return (
       <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16 centered" />
@@ -44,26 +50,22 @@ const ListEntity: FC<ListProps> = ({ entityName }) => {
   // console.log(_.keys(QqlTypes),QqlTypes["Query"+_.startCase(entityName)+"Args"])
 
   const results = _.get(data, entityName + '.data.results', []);
-  console.log(results);
+
   const colObj = _.map(_.keys(results[0]), (colName) => {
     return typeof results[0][colName] === 'string'
       ? { field: colName, use: _.startCase(colName) }
       : null;
   });
+  const jsonSchema = sdkJsonSchema(entityName);
   return (
     <div className="flex flex-col">
       <h1>List of {_.startCase(entityName)}</h1>
       <SearchBar
         filtersData={filters.variables}
-        onSubmitFilters={(filters) => {
-          // console.log(filters);
-          return setFilters({ variables: filters.formData });
-        }}
-        vars={_.get(
-          sdkSchemas,
-          'definitions.' + _.startCase(entityName) + 'QueryQueryVariables',
-          {}
-        )}
+        onSubmitFilters={({ formData }): any =>
+          setFilters({ variables: formData })
+        }
+        jsonSchema={jsonSchema}
       />
       <Table columns={_.compact(colObj)} rows={results} />
     </div>
