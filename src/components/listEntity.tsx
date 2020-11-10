@@ -9,7 +9,7 @@ import 'react-tailwind-table/dist/index.css';
 import * as GenSdk from '@/generated/sdk';
 import * as Apollo from '@apollo/client';
 import SearchBar from '@/components/searchBar';
-//import { CharactersQueryQueryVariables } from '@/generated/sdk';
+import { Spin } from 'antd';
 
 const sdk: any = GenSdk.getSdk(Apollo.useQuery);
 const sdkJsonSchema = (entityName: string) => {
@@ -41,13 +41,13 @@ const ListEntity: FC<ListProps> = ({ entityName }) => {
 
   if (loading)
     return (
-      <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-16 w-16 centered" />
+      <div className="flex h-screen">
+        <div className="m-auto">
+          <Spin size="large" />
+        </div>
+      </div>
     );
   if (error || !data) return <p>ERROR</p>;
-
-  //const offset = _.get(data, 'offset', 0);
-  //const limit = _.get(data, 'limit', 20);
-  // console.log(_.keys(QqlTypes),QqlTypes["Query"+_.startCase(entityName)+"Args"])
 
   const results = _.get(data, entityName + '.data.results', []);
 
@@ -58,8 +58,7 @@ const ListEntity: FC<ListProps> = ({ entityName }) => {
   });
   const jsonSchema = sdkJsonSchema(entityName);
   return (
-    <div className="flex flex-col">
-      <h1>List of {_.startCase(entityName)}</h1>
+    <>
       <SearchBar
         filtersData={filters.variables}
         onSubmitFilters={({ formData }): any =>
@@ -68,7 +67,7 @@ const ListEntity: FC<ListProps> = ({ entityName }) => {
         jsonSchema={jsonSchema}
       />
       <Table columns={_.compact(colObj)} rows={results} />
-    </div>
+    </>
   );
 };
 

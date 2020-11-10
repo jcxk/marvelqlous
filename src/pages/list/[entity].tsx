@@ -1,13 +1,15 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import _ from 'lodash';
 import ListEntity from '@/components/listEntity';
+import configApp from '@/config/app.json';
 
 const ListPage: React.FC = (props) => {
-  const router = useRouter();
-  const entityName = _.get(router, 'query.entity', false);
-  return entityName !== false ? (
-    <ListEntity entityName={entityName} />
+  const { entity } = props.query;
+  if (!entity) {
+    return <></>;
+  }
+  return _.includes(configApp.entities, entity) ? (
+    <ListEntity entityName={entity} />
   ) : (
     <p>No valid entity</p>
   );

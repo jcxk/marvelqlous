@@ -19,7 +19,7 @@ const SearchBar: FC<ListProps> = ({
   onSubmitFilters,
 }) => {
   const [showModal, setShowModal] = React.useState(false);
-  let uiSchema = {};
+  const uiSchema = {};
   _.map(['orderBy', 'offset', 'limit'], (fieldName) => {
     uiSchema[fieldName] = { 'ui:widget': 'hidden' };
   });

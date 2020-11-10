@@ -6,6 +6,8 @@
       "@/lib/*": ["src/lib/*"],
       "@/api/*": ["src/api/*"],
       "@/styles/*": ["src/styles/*"],
+      "@/layouts/*": ["src/layouts/*"],
+      "@/config/*": ["src/config/*"],
       "@/pages/*": ["src/pages/*"]
     },
     "baseUrl": ".",
