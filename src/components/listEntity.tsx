@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import _ from 'lodash';
-import { withApollo } from '@/lib/apollo';
 
 import Table from 'react-tailwind-table';
 import sdkSchemas from '@/generated/sdk.json';
@@ -10,8 +9,8 @@ import * as GenSdk from '@/generated/sdk';
 import * as Apollo from '@apollo/client';
 import SearchBar from '@/components/searchBar';
 import { Spin } from 'antd';
-
-const sdk: any = GenSdk.getSdk(Apollo.useQuery);
+const requester: any = Apollo.useQuery;
+const sdk: any = GenSdk.getSdk(requester);
 const sdkJsonSchema = (entityName: string) => {
   return _.get(
     sdkSchemas,
@@ -22,7 +21,7 @@ const sdkJsonSchema = (entityName: string) => {
 
 type ListProps = {
   entityName: string;
-  client: any;
+  //client: any;
 };
 
 const ListEntity: FC<ListProps> = ({ entityName }) => {
@@ -61,9 +60,7 @@ const ListEntity: FC<ListProps> = ({ entityName }) => {
     <>
       <SearchBar
         filtersData={filters.variables}
-        onSubmitFilters={({ formData }): any =>
-          setFilters({ variables: formData })
-        }
+        onSubmitFilters={({ formData }) => setFilters({ variables: formData })}
         jsonSchema={jsonSchema}
       />
       <Table columns={_.compact(colObj)} rows={results} />
@@ -71,4 +68,4 @@ const ListEntity: FC<ListProps> = ({ entityName }) => {
   );
 };
 
-export default withApollo(ListEntity);
+export default ListEntity;

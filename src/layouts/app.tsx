@@ -6,11 +6,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import _ from 'lodash';
 
-type AppLayoutProps = {
-  query: any;
-};
+type AppLayoutProps = {};
 
-const AppLayout: React.FC<AppLayoutProps> = ({ query, children }) => {
+const AppLayout: React.FC<AppLayoutProps> = ({ children }) => {
+  const router = useRouter();
+  const entity: any = _.get(router.query, 'entity', '');
   const mainMenu = _.map(configApp.entities, (entityName) => {
     return (
       <Menu.Item key={entityName}>
@@ -29,26 +29,23 @@ const AppLayout: React.FC<AppLayoutProps> = ({ query, children }) => {
       breadcrumbName: 'List',
     },
     {
-      path: query.entity,
-      breadcrumbName: _.startCase(query.entity),
+      path: entity,
+      breadcrumbName: _.startCase(entity),
     },
   ];
+
   return (
     <Layout className="layout">
       <Header>
         <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={[query.entity]}
-        >
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[entity]}>
           {mainMenu}
         </Menu>
       </Header>
       <Content style={{ padding: '0 50px' }}>
         <PageHeader
           className="site-page-header"
-          title={'List of ' + query.entity}
+          title={'List of ' + entity}
           breadcrumb={{ routes }}
         />
 

@@ -19,8 +19,8 @@ function MyApp({ Component, pageProps, router }: AppProps) {
       </div>
     );
   return (
-    <AppLayout query={router.query}>
-      <Component {...pageProps} query={router.query} />
+    <AppLayout>
+      <Component {...pageProps} />
     </AppLayout>
   );
 }

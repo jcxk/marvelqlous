@@ -41,6 +41,7 @@
     "@graphql-tools/schema": "^6.2.3",
     "@rjsf/antd": "^2.4.0",
     "@rjsf/core": "^2.4.0",
+    "@types/graphql-iso-date": "^3.4.0",
     "antd": "^4.8.0",
     "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",

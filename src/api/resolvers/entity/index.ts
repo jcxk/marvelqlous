@@ -1,8 +1,8 @@
 //import otherEntity from './launch.entity';
 import _ from 'lodash';
-module.exports = {
+export default {
   marvelEntityResult: {
-    __resolveType(obj, context, info) {
+    __resolveType(_obj: any, info: any) {
       if (_.get(info, 'variableValues.entity', false) !== false) {
         return _.startCase(info.variableValues.entity);
       }

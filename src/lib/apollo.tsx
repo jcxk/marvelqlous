@@ -4,7 +4,17 @@ import { ApolloProvider } from '@apollo/react-hooks';
 import fetch from 'isomorphic-unfetch';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
-export function withApollo(PageComponent: any): void {
+export function withApollo(
+  PageComponent: any
+): ({
+  apolloClient,
+  apolloState,
+  ...pageProps
+}: {
+  apolloClient: any;
+  apolloState: any;
+  [p: string]: any;
+}) => JSX.Element {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApolloClient(apolloState);
 

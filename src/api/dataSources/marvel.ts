@@ -1,4 +1,4 @@
-import { RESTDataSource } from 'apollo-datasource-rest';
+import { RequestOptions, RESTDataSource } from 'apollo-datasource-rest';
 import _ from 'lodash';
 import crypto from 'crypto';
 import SwaggerClient from 'swagger-client';
@@ -43,11 +43,11 @@ export default class MarvelAPI extends RESTDataSource {
     });
   }
 
-  async getCharacterById(id) {
+  async getCharacterById(id: string) {
     return this.get(`characters/${id}`);
   }
 
-  willSendRequest(request) {
+  willSendRequest(request: RequestOptions) {
     const ts = new Date().getTime().toString();
     request.params.set('apikey', this.publicKey);
     request.params.set('ts', ts);
@@ -60,11 +60,11 @@ export default class MarvelAPI extends RESTDataSource {
     );
   }
 
-  async getEntityByArgs(params) {
+  async getEntityByArgs(params: any) {
     return this.get(params.marvelEntity + 's', params.filters);
   }
 
-  async getEntity(entityName, params) {
+  async getEntity(entityName: string, params: any) {
     return this.get(entityName, params);
   }
 }

@@ -1,6 +1,5 @@
 import marvelQuery from './marvel.query';
-
-module.exports = {
+export default {
   Query: {
     ...marvelQuery,
   },

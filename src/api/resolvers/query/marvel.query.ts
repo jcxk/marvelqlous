@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
 const resolvers: any = {
-  list: async (parent, args, { dataSources }, info) => {
+  async list(_parent: any, args: any, { dataSources }, _info: any) {
     const client = await dataSources.marvelApi.getClient();
     const response = await client.apis.default[args.marvelEntity + 's'](
       args.filters

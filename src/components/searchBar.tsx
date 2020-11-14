@@ -4,7 +4,7 @@ import { Modal, Button, Spin } from 'antd';
 
 type ListProps = {
   jsonSchema: any;
-  onSubmitFilters: void;
+  onSubmitFilters: any;
   filtersData: any;
   // client: any;
 };
