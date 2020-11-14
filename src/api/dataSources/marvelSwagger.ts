@@ -12,6 +12,7 @@ export default class marvelSwaggerAPI {
     this.baseURL = 'https://gateway.marvel.com/v1/public/';
     this.publicKey = _.get(process.env, 'MARVEL_API_PUBLIC_KEY', '');
     this.privateKey = _.get(process.env, 'MARVEL_API_PRIVATE_KEY', '');
+    console.log(this, process.env);
   }
 
   async getClient() {
