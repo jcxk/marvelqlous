@@ -5,7 +5,7 @@ import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import dataSources from '@/api/dataSources/';
-
+console.log(process.cwd(), __dirname);
 const schema = loadSchemaSync(
   join(process.cwd(), '/src/api/schema/*.graphql'),
   { loaders: [new GraphQLFileLoader()] }
