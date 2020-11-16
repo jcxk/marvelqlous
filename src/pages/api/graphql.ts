@@ -7,9 +7,13 @@ import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import dataSources from '@/api/dataSources/';
 
+import getConfig from 'next/config';
+const { serverRuntimeConfig } = getConfig();
+
 const SCHEMAS_PATH = '/src/api/schema/*.graphql';
-const schemaAbsPath = join(process.cwd() + SCHEMAS_PATH);
-console.log(process.cwd());
+const root = serverRuntimeConfig.PROJECT_ROOT;
+const schemaAbsPath = join(root + SCHEMAS_PATH);
+console.log(process.cwd(), __dirname, root);
 
 let schema: any;
 try {
