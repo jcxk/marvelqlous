@@ -7,10 +7,19 @@ import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import dataSources from '@/api/dataSources/';
 
-const schema = loadSchemaSync(
-  join(process.cwd(), '/src/api/schema/*.graphql'),
-  { loaders: [new GraphQLFileLoader()] }
-);
+const SCHEMAS_PATH = '/src/api/schema/*.graphql';
+const schemaAbsPath = join(process.cwd() + SCHEMAS_PATH);
+console.log(process.cwd());
+
+let schema: any;
+try {
+  schema = loadSchemaSync(schemaAbsPath, {
+    loaders: [new GraphQLFileLoader()],
+  });
+} catch (e) {
+  console.log(process.cwd(), schemaAbsPath);
+  console.log(e);
+}
 
 //const { RedisCache } = require('apollo-server-cache-redis');
 
