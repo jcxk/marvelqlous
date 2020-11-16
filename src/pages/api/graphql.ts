@@ -41,10 +41,26 @@ fs.readdir(schemaAbsPath, function (err, files) {
   });
 });
 
-const loadedSchema = loadSchemaSync(schemaAbsPath, {
-  loaders: [new GraphQLFileLoader()],
-});
-const schema = addResolversToSchema(loadedSchema, resolversObj);
+const typeDefs = `
+  type Query {
+    hello: String
+  }
+`;
+
+// Provide resolver functions for your schema fields
+const resolvers = {
+  Query: {
+    hello: () => `Hello world!`,
+  },
+};
+try {
+  const loadedSchema = loadSchemaSync(schemaAbsPath, {
+    loaders: [new GraphQLFileLoader()],
+  });
+  const schema = addResolversToSchema(loadedSchema, resolversObj);
+} catch (e) {
+  console.log(e);
+}
 
 const conf = {
   dataSources,
@@ -53,8 +69,8 @@ const conf = {
   context(ctx) {
     return ctx;
   },
-  schema,
-
+  typeDefs,
+  resolvers,
   /*
   cache: new RedisCache({
       host: 'localhost',
