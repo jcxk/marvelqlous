@@ -29,19 +29,7 @@ export const config = {
 
 import fs from 'fs';
 
-fs.readdir(process.cwd(), function (err, files) {
-  //handling error
-  if (err) {
-    return console.log('Unable to scan directory: ' + err);
-  }
-  //listing all files using forEach
-  files.forEach(function (file) {
-    // Do whatever you want to do with the file
-    console.log(file);
-  });
-});
-
-fs.readdir(root, function (err, files) {
+fs.readdir('_files', function (err, files) {
   //handling error
   if (err) {
     return console.log('Unable to scan directory: ' + err);
