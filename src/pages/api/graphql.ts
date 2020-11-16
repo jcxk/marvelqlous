@@ -29,7 +29,7 @@ export const config = {
 
 import fs from 'fs';
 
-fs.readdir('_files', function (err, files) {
+fs.readdir(join(__dirname, '_files'), function (err, files) {
   //handling error
   if (err) {
     return console.log('Unable to scan directory: ' + err);
