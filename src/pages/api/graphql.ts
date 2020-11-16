@@ -15,16 +15,6 @@ const root = serverRuntimeConfig.PROJECT_ROOT;
 const schemaAbsPath = join(root + SCHEMAS_PATH);
 console.log(process.cwd(), __dirname, root);
 
-let schema: any;
-try {
-  schema = loadSchemaSync(schemaAbsPath, {
-    loaders: [new GraphQLFileLoader()],
-  });
-} catch (e) {
-  console.log(process.cwd(), schemaAbsPath);
-  console.log(e);
-}
-
 //const { RedisCache } = require('apollo-server-cache-redis');
 
 const cors = Cors({
@@ -37,6 +27,25 @@ export const config = {
   },
 };
 
+import fs from 'fs';
+
+fs.readdir(schemaAbsPath, function (err, files) {
+  //handling error
+  if (err) {
+    return console.log('Unable to scan directory: ' + err);
+  }
+  //listing all files using forEach
+  files.forEach(function (file) {
+    // Do whatever you want to do with the file
+    console.log(file);
+  });
+});
+
+const loadedSchema = loadSchemaSync(schemaAbsPath, {
+  loaders: [new GraphQLFileLoader()],
+});
+const schema = addResolversToSchema(loadedSchema, resolversObj);
+
 const conf = {
   dataSources,
   introspection: true,
@@ -44,7 +53,7 @@ const conf = {
   context(ctx) {
     return ctx;
   },
-  schema: addResolversToSchema(schema, resolversObj),
+  schema,
 
   /*
   cache: new RedisCache({
