@@ -1,4 +1,5 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
+import microCors from 'micro-cors';
 import { resolversObj } from '@/api/resolvers';
 import { join } from 'path';
 import { loadSchemaSync } from '@graphql-tools/load';
@@ -31,9 +32,10 @@ const conf = {
     return true;
   },
   */
-
-  uploads: false,
-  path: '/api/graphql',
 };
+const cors = microCors();
 const apolloServer = new ApolloServer(conf);
-export default apolloServer.createHandler({ path: '/api/graphql' });
+const handler = apolloServer.createHandler({ path: '/api/graphql' });
+export default cors((req, res) =>
+  req.method === 'OPTIONS' ? res.end() : handler(req, res)
+);
