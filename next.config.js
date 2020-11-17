@@ -1,7 +1,4 @@
 module.exports = {
-  serverRuntimeConfig: {
-    PROJECT_ROOT: __dirname,
-  },
   async redirects() {
     return [
       {

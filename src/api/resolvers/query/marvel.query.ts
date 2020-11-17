@@ -28,15 +28,4 @@ const resolvers: any = {
     };
   },
 };
-
-const entityNames = ['characters', 'comics', 'creators', 'events'];
-
-_.map(entityNames, (entityName) => {
-  resolvers[entityName] = async (parent, args, { dataSources }, info) => {
-    const client = await dataSources.marvelApi.getClient();
-    const response = await client.apis.default[entityName](args);
-    return response.obj;
-  };
-});
-
 export default resolvers;

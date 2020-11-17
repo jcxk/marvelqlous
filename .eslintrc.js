@@ -34,6 +34,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     'jsx-a11y/label-has-associated-control': [
       'error',
