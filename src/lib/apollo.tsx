@@ -1,8 +1,7 @@
-import ApolloClient from 'apollo-boost';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { createHttpLink } from 'apollo-link-http';
 import Head from 'next/head';
 import { ApolloProvider } from '@apollo/react-hooks';
-import fetch from 'isomorphic-unfetch';
-import { InMemoryCache } from 'apollo-cache-inmemory';
 
 export function withApollo(
   PageComponent: any
@@ -67,15 +66,11 @@ export function withApollo(
   return WithApollo;
 }
 
-const isDev = process.env.NODE_ENV !== 'production';
-const url = isDev
-  ? 'http://localhost:3000'
-  : 'https://tracker.scotttolinski.now.sh';
-
 const initApolloClient = (initialState = {}) => {
   return new ApolloClient({
-    uri: `${url}/api/graphql`,
-    fetch,
-    cache: new InMemoryCache().restore(initialState),
+    credentials: 'include',
+    connectToDevTools: true,
+    link: createHttpLink({ uri: '/api/graphql' }),
+    cache: new InMemoryCache(),
   });
 };
