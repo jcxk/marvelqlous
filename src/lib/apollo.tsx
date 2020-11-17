@@ -1,5 +1,6 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloLink, InMemoryCache } from '@apollo/client';
 import { createHttpLink } from 'apollo-link-http';
+import { onError } from 'apollo-link-error';
 import Head from 'next/head';
 import { ApolloProvider } from '@apollo/react-hooks';
 
@@ -67,10 +68,14 @@ export function withApollo(
 }
 
 const initApolloClient = (initialState = {}) => {
+  const errorLink: any = onError(({ networkError }) => {
+    console.log(errorLink);
+  });
+  const httpLink: any = createHttpLink({ uri: '/api/graphql' });
   return new ApolloClient({
     credentials: 'include',
     connectToDevTools: true,
-    link: createHttpLink({ uri: '/api/graphql' }),
+    link: errorLink.concat(httpLink),
     cache: new InMemoryCache(),
   });
 };
