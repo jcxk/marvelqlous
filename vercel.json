@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/graphql.ts": {
-      "includeFiles": "api/schema/**"
-    }
-  },
   "headers": [
     {
       "source": "/api/(.*)",
