@@ -4,9 +4,7 @@ import dataSources from '@/api/dataSources/';
 import { schema } from '@/api/schema';
 //const { RedisCache } = require('apollo-server-cache-redis');
 
-const cors = Cors({
-  allowMethods: ['POST', 'OPTIONS'],
-});
+const cors = Cors();
 
 export const config = {
   api: {
@@ -35,4 +33,6 @@ const conf = {
 
 const server = new ApolloServer(conf);
 const handler = server.createHandler({ path: '/api/graphql' });
-export default cors(handler);
+export default cors((req, res) =>
+  req.method === 'OPTIONS' ? res.end() : handler(req, res)
+);
