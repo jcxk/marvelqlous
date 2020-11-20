@@ -1,6 +1,6 @@
 {
-  "name": "marveloqlous",
-  "version": "0.1.1",
+  "name": "marvelqlous",
+  "version": "1.0.0",
   "author": "jcxk",
   "repository": {
     "type": "git",
@@ -8,20 +8,20 @@
   },
   "license": "ISC",
   "scripts": {
-    "sw1to2": "api-spec-converter --alpha -d --from=swagger_1 --to=swagger_2 ",
-    "marvel:fixed:swagger": "npm run sw1to2 https://gateway.marvel.com/docs/public >  ./src/api/external/marvel.json",
-    "marvel:fix:custom": "sh tools/fixOperationIds.sh",
+    "tools:swagger:sw1to2": "api-spec-converter --alpha -d --from=swagger_1 --to=swagger_2 ",
+    "tools:swagger:fix:operationIds": "sh tools/fixOperationIds.sh",
+    "marvel:get:swagger": "npm run -s tools:swagger:sw1to2 https://gateway.marvel.com/docs/public > ./src/api/external/marvel.json",
+    "postmarvel:get:swagger": "npm run -s tools:swagger:fix:operationIds ./src/api/external/marvel.json > ./src/api/external/marvel_fixed.json",
+    "marvel:swagger2graphql": "swagger-to-graphql --swagger-schema=./src/api/external/marvel_fixed.json > ./src/api/schema/generated.graphql",
+    "marvel:generate:sdk": "mesh generate-sdk --output ./src/generated/sdk.ts --depth 5",
+    "marvel:generate:sdk-json-schema": "typescript-json-schema src/generated/sdk.ts '*' -o src/generated/sdk.json",
     "dev": "next dev",
     "dev:debug": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "gql-codegen": "graphql-codegen --config codegen.yml",
-    "sdk:json-schema": "typescript-json-schema src/generated/sdk.ts \"*\" -o src/generated/sdk.json",
-    "mesh:serve": "mesh serve",
-    "mesh:sdk": "mesh generate-sdk --output ./src/generated/sdk.ts --depth 5"
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "husky": {
     "hooks": {

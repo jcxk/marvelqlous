@@ -1,21 +1,33 @@
 #Marvelqlous
 
-Based on marvel api https://developer.marvel.com/documentation/getting_started,
-converting the swagger1 api, to grahpql with the tools script.
+Side project as POC of how fast can a fully graphql backend  and frontend with list grid and filters 
+can be done just importing the conf, total dynamic, from the original swagger.json (v1) from marvel api devs as use case.
 
-Demo at https://marvelqlous.vercel.app/list/comics
+Previous Steps ( look package.json from paths ) :
 
-App (WIP) showcase for:
+0.We need to copy .env.sample file with our credentials, check https://developer.marvel.com.
 
-- How graphql/apollo client can speed up development:
-  - client easy handling data and queries
-  - typed data extracted from schema enables frontend contract and request/response not hardcoded.
-  - refetching/optimistic updates
-  - caching
-  - offline usage graphql as redux
-- Next benefits
-  - Clean structure front/back
-  - ssr
+1.Get swagger json original file and operationIds fixed file.
+``` shell script
+npm run marvel:get:swagger 
+```
+2.Generate graphql file from swagger file from step 1.
+ ``` shell script
+npm run marvel:swagger2graphql
+ ```
+3. Generate sdk with graphql-mesh
+``` shell script
+marvel:generate:sdk
+ ```
+4. generate json-schema (filters) using npm run sdk:json-schema
+``` shell script
+marvel:generate:sdk-json-schema
+ ```
+
+
+No hardcoded endpoints config, if marvel api change we just need to redo steps 1-4. 
+
+Demo at https://marvelqlous.vercel.app
 
 STACK
 
@@ -23,4 +35,12 @@ STACK
 - [x] typescript
 - [x] graphql
 - [x] apollo graphql
+- [x] react-json-schema-form
+- [x] antd 
 - [x] tailwind
+
+
+ROADMAP:
+
+- [] atnd autocomplete for filters on fields of type array ids, need a custom rjsf implementation.
+- [] sdk resolvers generator (swagger.js), left room for requestInterceptor to be injected, for especial credentials format.
